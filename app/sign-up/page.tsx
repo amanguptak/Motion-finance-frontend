@@ -2,6 +2,7 @@
 import React from 'react'
 import {useForm} from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
+import axios from "axios"
 import {
     Form,
     FormControl,
@@ -16,8 +17,10 @@ import {
 import { signUpSchema , SignUpSchemaType } from '@/schema/validation'
 import Link from 'next/link'
 import SideImg from '@/components/SideImg'
-
+import { useRouter } from 'next/navigation'
+import { toast } from "sonner";
 const SignUp = () => {
+  const router = useRouter()
     const  form = useForm<SignUpSchemaType>({
         resolver: zodResolver(signUpSchema),
         defaultValues: {
@@ -28,8 +31,18 @@ const SignUp = () => {
             confirmPassword:""
            },
     })
-    const onSubmit = (values: SignUpSchemaType) => {
-        console.log(values)
+    const onSubmit = async(values: SignUpSchemaType) => {
+       try{
+        const { confirmPassword, ...formData } = values;
+        const res = await axios.post("http://localhost:5000/api/auth/register", formData)
+        // console.log(res.data)
+        form.reset()
+        toast.success("Registered Successfully")
+      
+        router.push("/manage-finance")
+       }catch(err){
+        console.error(err)
+       }
     }
   return (
     <div className='flex items-center flex-col lg:flex-row justify-center h-screen  overflow-hidden'>

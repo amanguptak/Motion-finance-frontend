@@ -19,7 +19,7 @@ const Landing = () => {
           </p>
           <Button className="mt-5">
             {" "}
-            <Link href="/login">Let Start</Link>
+            <Link href="/login">Let&apos;s Start</Link>
           </Button>
         </div>
       </div>
