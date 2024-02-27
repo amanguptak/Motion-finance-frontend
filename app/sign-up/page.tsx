@@ -34,8 +34,8 @@ const SignUp = () => {
     const onSubmit = async(values: SignUpSchemaType) => {
        try{
         const { confirmPassword, ...formData } = values;
-        const res = await axios.post("http://localhost:5000/api/auth/register", formData)
-        // console.log(res.data)
+        const res = await axios.post("/api/auth/register", formData)
+        console.log(res.data)
         form.reset()
         toast.success("Registered Successfully")
       
