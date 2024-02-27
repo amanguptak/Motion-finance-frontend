@@ -3,7 +3,7 @@ import React from 'react'
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import axios from "axios"
-import Banner from "@/public/images/loginG.png"
+import Banner from "@/public/images/Forgotpassword.png"
 import {
   Form,
   FormControl,
@@ -15,21 +15,20 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from '@/components/ui/button'
-import { LoginSchemaType ,loginSchema } from '@/schema/validation';
+import { ForgetSchemaType ,forgetSchema } from '@/schema/validation';
 import Link from 'next/link';
 import SideImg from '@/components/SideImg';
 import { useRouter } from 'next/navigation'
 import { toast } from "sonner";
-const Auth = () => {
-  const form = useForm<LoginSchemaType>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-     email : '',
-     password: '',
-    },
-  })
+const ForgetPassword = () => {
+    const form = useForm<ForgetSchemaType>({
+        resolver: zodResolver(forgetSchema),
+        defaultValues: {
+          email: ''
+        }
+      });
   const router = useRouter()
-  const onSubmit = async(values: LoginSchemaType) => {
+  const onSubmit = async(values: ForgetSchemaType) => {
     try{
  
       const res = await axios.post( `/api/auth/login`, values)
@@ -50,9 +49,11 @@ const Auth = () => {
      
      
        <div className=' shadow-2xl rounded-lg p-7 lg:w-[30%] cursor-pointer transform hover:scale-105 transition-transform duration-300 ease-in-out'>
-        <h3 className='font-semibold text-rose-500 text-2xl m-5 mx-0'>Login</h3>
+        <h3 className='font-semibold text-rose-500 text-2xl m-5 mx-0'>
+            Forgot Password
+        </h3>
        <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mb-2">
         <FormField
           control={form.control}
           name="email"
@@ -67,33 +68,15 @@ const Auth = () => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input placeholder="password" type='password' {...field} />
-              </FormControl>
-             
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Login</Button>
+       
+        <Button type="submit" >Send OTP</Button>
       </form>
     </Form>
-
-    <div className='flex items-center justify-between gap-9'>
-    <Link href="/sign-up" className='text-rose-500 text-xs cursor-pointer mt-14'>Create an Account</Link>
-    <Link href="/forgot-password" className='text-rose-500 text-xs cursor-pointer mt-14'>Forgot Password</Link>
-
-    </div>
+    <Link href="/login" className='text-rose-500 text-xs cursor-pointer'>Login Here</Link>
        </div>
             
     </div>
   )
 }
 
-export default Auth
+export default ForgetPassword

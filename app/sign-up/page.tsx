@@ -3,6 +3,7 @@ import React from 'react'
 import {useForm} from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from "axios"
+import SignUpImg from "@/public/images/signup.png"
 import {
     Form,
     FormControl,
@@ -48,7 +49,7 @@ const SignUp = () => {
     <div className='flex items-center flex-col lg:flex-row justify-center h-screen  overflow-hidden'>
 
      
-      <SideImg/>
+    
      
        <div className=' shadow-2xl rounded-lg lg:w-[50%] cursor-pointer m-5 p-10 transform  hover:scale-105 transition-transform duration-300 ease-in-out'>
        <h3 className='font-semibold text-rose-500 text-2xl m-5 mx-0'>Sign UP</h3>
@@ -133,7 +134,7 @@ const SignUp = () => {
     </Form>
     <Link href="/login" className='text-rose-500 text-xs cursor-pointer mt-14'>Already have an account</Link>
        </div>
-            
+       <SideImg imageName={SignUpImg}/>  
     </div>
   )
 }
