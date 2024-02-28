@@ -37,6 +37,17 @@ export const forgetSchema = z.object({
     .email({ message: "Enter Valid Email" }),
 });
 
+export const resetPasswordSchema = z.object({
+  newPassword: z.string().min(1, { message: "New Password is required" }),
+  confirmPassword: z.string(),
+
+}).refine((data) => data.newPassword === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"], // Optional: specifies the field to attach the error message to
+});;
+
 export type LoginSchemaType = z.infer<typeof loginSchema>;
 export type SignUpSchemaType = z.infer<typeof signUpSchema>;
 export type ForgetSchemaType = z.infer<typeof forgetSchema>;
+
+export type ResetPasswordType = z.infer<typeof resetPasswordSchema>;

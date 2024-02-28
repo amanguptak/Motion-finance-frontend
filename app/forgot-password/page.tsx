@@ -28,18 +28,20 @@ const ForgetPassword = () => {
         }
       });
   const router = useRouter()
-  const onSubmit = async(values: ForgetSchemaType) => {
-    try{
+  const onSubmit = (values: ForgetSchemaType) => {
+     console.log(values)
+    router.push("/reset-password")
+
+    // try{
  
-      const res = await axios.post( `/api/auth/login`, values)
-      // console.log(res)
-      form.reset()
-      toast.success("Logged In Successfully")
-    
-      router.push("/manage-finance")
-     }catch(err){
-      console.error(err)
-     }
+    //   const res = await axios.post( `/api/auth/login`, values)
+    //   // console.log(res)
+    //   form.reset()
+    //   toast.success("Logged In Successfully")
+   
+    //  }catch(err){
+    //   console.error(err)
+    //  }
   }
   return (
     <div className='flex flex-col lg:flex-row items-center justify-center h-screen overflow-hidden lg:gap-9'>
