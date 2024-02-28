@@ -51,7 +51,7 @@ const SignUp = () => {
      
     
      
-       <div className=' shadow-2xl rounded-lg lg:w-[50%] cursor-pointer m-5 p-10 transform  hover:scale-105 transition-transform duration-300 ease-in-out'>
+       <div className=' shadow-xl rounded-lg lg:w-[50%] cursor-pointer m-5 p-10 transform  hover:scale-105 transition-transform duration-300 ease-in-out'>
        <h3 className='font-semibold text-rose-500 text-2xl m-5 mx-0'>Sign UP</h3>
        <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

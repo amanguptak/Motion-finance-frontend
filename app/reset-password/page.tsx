@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import Banner from "@/public/images/Reset-password.png";
-import Otp from "@/components/OTP";
+import VerifyOtp from "./_components/verifyOtp";
+
 import {
   Form,
   FormControl,
@@ -22,6 +23,8 @@ import SideImg from "@/components/SideImg";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 const ResetPassword = () => {
+    const [verified, setVerified] = useState<boolean>(false);
+
   const form = useForm<ResetPasswordType>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
@@ -51,7 +54,7 @@ const ResetPassword = () => {
         <h3 className="font-semibold text-rose-500 text-2xl m-5 mx-0">
           Reset Password
         </h3>
-
+        <VerifyOtp verifiedStatus={()=>{setVerified(true)}}/>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -86,12 +89,11 @@ const ResetPassword = () => {
               )}
             />
 
-            <Button type="submit">Reset</Button>
+            <Button type="submit" disabled={!verified}>
+              Reset
+            </Button>
           </form>
         </Form>
-        <Link href="/login" className="text-rose-500 text-xs cursor-pointer">
-          Login Here
-        </Link>
       </div>
 
       <SideImg imageName={Banner} />

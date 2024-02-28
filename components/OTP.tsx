@@ -4,12 +4,13 @@ import { useState, Fragment, useRef, useEffect } from "react";
 type OtpInputProps = {
   length: number;
   otp: number;
+  resetOtp:boolean;
   onOtpChange: (otp: number) => void;
 };
 
 let currentOtpIndex: number = 0;
 
-const Otp = ({ length, otp, onOtpChange }: OtpInputProps): JSX.Element => {
+const Otp = ({ length, otp, onOtpChange ,resetOtp}: OtpInputProps): JSX.Element => {
   const [tempOtp, setTempOtp] = useState<string[]>(
     new Array(length || 6).fill("")
   );
@@ -47,6 +48,20 @@ const Otp = ({ length, otp, onOtpChange }: OtpInputProps): JSX.Element => {
     inputRef.current?.focus();
   }, [activeOtpIndex]);
 
+
+  useEffect(() => {
+    // Reset tempOtp array when resetOtp changes
+    if (resetOtp) {
+      setTempOtp(new Array(length || 6).fill(""));
+      setActiveOtpIndex(0);
+    }
+  }, [resetOtp, length]);
+  
+  useEffect(() => {
+    // Reset local index state when length changes
+    setActiveOtpIndex(0);
+  }, [length]);
+
   return (
     <div className="flex items-center space-x-2  w-fit">
       {tempOtp.map((_, index) => {
@@ -56,7 +71,7 @@ const Otp = ({ length, otp, onOtpChange }: OtpInputProps): JSX.Element => {
               ref={index === activeOtpIndex ? inputRef : null}
               onChange={handleOnchange}
               onKeyDown={(e) => handleOnKeyDown(e, index)}
-              className="w-10 text-center placeholder:text-slate-300 dark:placeholder:text-slate-500"
+              className="w-10 text-center placeholder:text-slate-300 spin-button-none dark:placeholder:text-slate-500"
               type="number"
               placeholder={(index + 1).toString()}
               value={tempOtp[index]}
