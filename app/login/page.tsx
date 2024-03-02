@@ -37,9 +37,10 @@ const Auth = () => {
       form.reset()
       toast.success("Logged In Successfully")
     
-      router.push("/manage-finance")
-     }catch(err){
-      console.error(err)
+      router.push("/dashboard")
+     }catch(err:any){
+  
+     toast.error(err?.response?.data?.message)
      }
   }
   return (

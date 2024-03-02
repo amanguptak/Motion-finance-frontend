@@ -1,11 +1,15 @@
-"use client";
+"use client"
+import React from 'react'
 import { Button } from "@/components/ui/button";
-import React from "react";
+
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
-const ManageFinance = () => {
-  const router = useRouter();
+import SearchBox from './Search';
+import NavbarRoutes from './NavbarRoutes';
+const Navbar = () => {
+
+ const router = useRouter();
   const handleLogOut = async () => {
     try {
       /* 
@@ -17,24 +21,24 @@ const ManageFinance = () => {
 
           */
 
-      const res = await axios.post(
-        "/api/auth/logout",
-        {},
-      
-      );
+      const res = await axios.post("/api/auth/logout", {});
       // { withCredentials: true }
-      console.log(res);
+
       toast.info("Logged out");
-      router.push("/");
-    } catch (err) {
-      console.log(err);
+        router.push("/")
+   
+    } catch (err:any) {
+      console.log(err?.response?.message);
     }
   };
   return (
-    <div>
-      <Button onClick={handleLogOut}>LogOut</Button>
-    </div>
-  );
-};
+    <nav className='shadow-xl bg-slate-50 flex items-center py-2 px-6 justify-between '>
+  
+        <SearchBox searchValue='Search'/>
+  
+        <Button onClick={handleLogOut}>LogOut</Button>
+    </nav>
+  )
+}
 
-export default ManageFinance;
+export default Navbar

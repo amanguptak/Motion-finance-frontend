@@ -23,13 +23,21 @@ import { toast } from "sonner";
 import Spinner from "@/components/Spinner";
 const ForgetPassword = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+
+
   const form = useForm<ForgetSchemaType>({
     resolver: zodResolver(forgetSchema),
     defaultValues: {
       email: "",
     },
   });
-  const router = useRouter();
+ 
+
+
+
+
+
   const onSubmit = async (values: ForgetSchemaType) => {
     try {
       setLoading(true);
@@ -37,8 +45,9 @@ const ForgetPassword = () => {
       toast.success(`OTP sent successfully to ${res?.data?.email}`);
       setLoading(false);
       router.push(`/reset-password?email=${values.email}`);
-    } catch (error) {
+    } catch (error:any) {
       console.log(error);
+      toast.error(error?.response?.message);
       setLoading(false);
     }
 
