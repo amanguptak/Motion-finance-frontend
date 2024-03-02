@@ -20,11 +20,25 @@ import { Button } from "@/components/ui/button";
 import { ResetPasswordType, resetPasswordSchema } from "@/schema/validation";
 import Link from "next/link";
 import SideImg from "@/components/SideImg";
-import { useRouter } from "next/navigation";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
+
+interface CustomError extends Error {
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
+}
 const ResetPassword = () => {
     const [verified, setVerified] = useState<boolean>(false);
+    const [getOtp , setGetOtp] = useState<number>(0);
 
+    // const pathName = usePathname()
+    const searchParams = useSearchParams()
+    const userEmail = searchParams.get("email")
+ 
   const form = useForm<ResetPasswordType>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
@@ -34,27 +48,40 @@ const ResetPassword = () => {
   });
 
   const router = useRouter();
-  const onSubmit = (values: ResetPasswordType) => {
-    console.log(values);
-    router.push("/login");
-    // try{
 
-    //   const res = await axios.post( `/api/auth/login`, values)
-    //   // console.log(res)
-    //   form.reset()
-    //   toast.success("Logged In Successfully")
-
-    //  }catch(err){
-    //   console.error(err)
-    //  }
-  };
+  const onSubmit = async(values: ResetPasswordType) => {
+ 
+   
+     console.log("Checking otp" , getOtp)
+    try{
+      const formData = {
+        email: userEmail,
+        otp: getOtp.toString(),
+        newPassword: values.newPassword
+      }
+      // console.log(formData);
+      const res = await axios.post("/api/auth/reset-password",formData);
+      if(res?.data?.passwordUpdated){
+        toast.success(`${res?.data?.user?.firstName}Password Updated Successfully`)
+        form.reset()
+        setTimeout(() =>{
+          router.push("/login")
+        },2000)
+        // router.push("/login");
+      }
+ 
+    }catch (err:any) {
+      const customErr = err as CustomError; // Type assertion
+      console.log(customErr?.response?.data?.message);
+      toast.error(customErr?.response?.data?.message);}
+   };
   return (
     <div className="flex flex-col lg:flex-row items-center justify-center h-screen overflow-hidden lg:gap-9">
       <div className=" shadow-2xl rounded-lg p-7 lg:w-[30%] cursor-pointer transform hover:scale-105 transition-transform duration-300 ease-in-out">
         <h3 className="font-semibold text-rose-500 text-2xl m-5 mx-0">
           Reset Password
         </h3>
-        <VerifyOtp verifiedStatus={()=>{setVerified(true)}}/>
+        <VerifyOtp verifiedStatus={()=>{setVerified(true)}} getVerified={verified} setGetOtp={setGetOtp}/>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

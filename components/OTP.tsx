@@ -11,6 +11,7 @@ type OtpInputProps = {
 let currentOtpIndex: number = 0;
 
 const Otp = ({ length, otp, onOtpChange ,resetOtp}: OtpInputProps): JSX.Element => {
+  
   const [tempOtp, setTempOtp] = useState<string[]>(
     new Array(length || 6).fill("")
   );
@@ -49,16 +50,18 @@ const Otp = ({ length, otp, onOtpChange ,resetOtp}: OtpInputProps): JSX.Element 
   }, [activeOtpIndex]);
 
 
+
   useEffect(() => {
     // Reset tempOtp array when resetOtp changes
     if (resetOtp) {
       setTempOtp(new Array(length || 6).fill(""));
       setActiveOtpIndex(0);
+
     }
   }, [resetOtp, length]);
-  
+
   useEffect(() => {
-    // Reset local index state when length changes
+  
     setActiveOtpIndex(0);
   }, [length]);
 
@@ -69,6 +72,7 @@ const Otp = ({ length, otp, onOtpChange ,resetOtp}: OtpInputProps): JSX.Element 
           <Fragment key={index}>
             <Input
               ref={index === activeOtpIndex ? inputRef : null}
+                required
               onChange={handleOnchange}
               onKeyDown={(e) => handleOnKeyDown(e, index)}
               className="w-10 text-center placeholder:text-slate-300 spin-button-none dark:placeholder:text-slate-500"

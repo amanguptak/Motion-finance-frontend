@@ -6,7 +6,7 @@
 // next.config.js
 // next.config.mjs
 export default {
-    reactStrictMode: true,
+    reactStrictMode: false,
     exportPathMap: async function (defaultConfig, { dev, dir, outDir }) {
       // ... (Optional: Handle export paths if needed)
     },
