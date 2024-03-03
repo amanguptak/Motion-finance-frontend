@@ -19,8 +19,8 @@ const NavbarItems = ({ label, icon: Icon, href }: NavbarItemProps) => {
     <>
       <div
         className={cn(
-          " hover:bg-rose-300 text-green-700 py-3 px-3 my-3 rounded-lg group ",
-          isActive&&"bg-rose-500 rounded-lg text-white"
+          " hover:bg-rose-300  py-3 px-3 my-3 rounded-md group ",
+          isActive&&"bg-slate-300 rounded-sm text-rose-500"
         )}
       >
         <Link href={href} className="text-sm  flex items-center ">

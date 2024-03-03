@@ -10,7 +10,7 @@ const layout = ({children}: Readonly<{children: React.ReactNode;}>) => {
         <SideBar/>
     </div>
 
-    <div className=" w-screen scrollbar-thin scrollbar-rounded scrollbar-thumb-amber-200 scroll md:overflow-y-scroll ">
+    <div className=" w-screen">
       <Navbar />
       <div className="scrollbar-thin scrollbar-rounded scrollbar-thumb-amber-200 scroll overflow-y-scroll ">
       {children}
