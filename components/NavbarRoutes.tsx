@@ -6,6 +6,7 @@ import {
   HandCoins,
   ReceiptText,
   CircleUserRound,
+  Hotel
 } from "lucide-react";
 
 
@@ -21,7 +22,7 @@ const NavbarRoutes = () => {
       icon: LayoutDashboard,
     },
     {
-      href: "/dashboard/calculate-tax",
+      href: "/tax-calculater",
       name: "Tax Calculation",
       icon: BadgeIndianRupee,
     },
@@ -29,6 +30,11 @@ const NavbarRoutes = () => {
       href: "/expense-saving",
       name: "Expense&Saving",
       icon: HandCoins,
+    },
+    {
+      href: "/dashboard/hra",
+      name: "HRA Calculator",
+      icon: Hotel,
     },
     {
       href: "/pending-bills",

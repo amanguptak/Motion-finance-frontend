@@ -13,7 +13,7 @@ const SideImg = ({ imageName }: SideImgProps) => {
       </h2>
       <Image
         src={imageName}
-        className="hidden lg:block cursor-pointer  "
+        className="hidden md:block cursor-pointer  "
         alt="login-img"
         width={700}
         height={700}

@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import boy from "@/public/images/boy.jpg";
+import boy from "@/public/images/Finance.png";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -25,6 +25,8 @@ const Landing = () => {
       </div>
 
       <div className="absolute bottom-0 overflow-hidden  w-full">
+
+        {/* <Image src={boy} alt="landing-img" width={500} height={500}/> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 280"

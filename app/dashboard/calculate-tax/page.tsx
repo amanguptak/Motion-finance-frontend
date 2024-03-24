@@ -1,9 +1,9 @@
 import React from 'react'
 
-const TaxCalculator = () => {
+const TaxData = () => {
   return (
     <div>TaxCalculator</div>
   )
 }
 
-export default TaxCalculator
+export default TaxData
