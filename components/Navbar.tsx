@@ -1,12 +1,17 @@
 "use client"
 import React from 'react'
 import { Button } from "@/components/ui/button";
+import {
+ 
+  CircleUserRound,
 
+} from "lucide-react";
 import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import SearchBox from './Search';
 import NavbarRoutes from './NavbarRoutes';
+import Link from 'next/link';
 const Navbar = () => {
 
  const router = useRouter();
@@ -35,8 +40,15 @@ const Navbar = () => {
     <nav className='shadow-xl hover:shadow-rose-700 m-3 rounded-md bg-slate-50 flex items-center py-2 px-6 justify-between '>
   
         <SearchBox searchValue='Search'/>
-  
+     
+
+      <div className='flex items-center gap-2'>
+
+      <Link      href= "/profile" >  <CircleUserRound/></Link>
         <Button onClick={handleLogOut}>LogOut</Button>
+      </div>
+
+      
     </nav>
   )
 }

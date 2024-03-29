@@ -41,11 +41,7 @@ const NavbarRoutes = () => {
       name: "Pending Bills",
       icon: ReceiptText,
     },
-    {
-      href: "/profile",
-      name: "Profile",
-      icon: CircleUserRound,
-    },
+  
   ];
 
   return (
