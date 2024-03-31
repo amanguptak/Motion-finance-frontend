@@ -78,7 +78,7 @@ const Auth = () => {
                 <Input placeholder="password" type='password' {...field} />
               </FormControl>
              
-              <FormMessage />
+              <FormMessage/>
             </FormItem>
           )}
         />
