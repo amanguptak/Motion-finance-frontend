@@ -40,7 +40,7 @@ const SignUp = () => {
       form.reset();
       toast.success("Registered Successfully");
 
-      router.push("/manage-finance");
+      router.push("/dashboard");
     } catch (err: any) {
       toast.error(err?.response?.data?.message);
     }
@@ -58,7 +58,7 @@ const SignUp = () => {
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>First Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="First Name"
