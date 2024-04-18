@@ -2,6 +2,7 @@
 import React from "react";
 import DataCard from "@/components/DataCard";
 import Nav from "./_components/Nav";
+import {HandCoins,TrendingUp,TrendingDown} from "lucide-react";
 const Home = () => {
   return (
     <div>
@@ -13,19 +14,25 @@ const Home = () => {
             date="02/24"
             value="1000$"
             period="-43%from last period"
+            icon={TrendingUp}
+            bgColor="green" 
           />
           <DataCard
-            label="income"
+            label="Expenses"
             date="02/24"
             value="1000$"
             period="-43%from last period"
+            icon={TrendingDown}
+            bgColor="rose" 
           />
 
           <DataCard
-            label="income"
+            label="Savings"
             date="02/24"
             value="1000$"
             period="-43%from last period"
+            icon={HandCoins}
+            bgColor="amber" 
           />
         </div>
       </main>

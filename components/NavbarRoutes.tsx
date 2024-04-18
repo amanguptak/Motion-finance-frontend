@@ -26,11 +26,7 @@ const NavbarRoutes = () => {
       name: "Tax Calculation",
       icon: BadgeIndianRupee,
     },
-    {
-      href: "/expense-saving",
-      name: "Expense&Saving",
-      icon: HandCoins,
-    },
+   
     {
       href: "/dashboard/hra",
       name: "HRA Calculator",
@@ -40,6 +36,11 @@ const NavbarRoutes = () => {
       href: "/pending-bills",
       name: "Pending Bills",
       icon: ReceiptText,
+    },
+    {
+      href: "/settings",
+      name: "Settings",
+      icon: HandCoins,
     },
   
   ];
