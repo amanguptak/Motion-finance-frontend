@@ -45,13 +45,14 @@ const NavbarRoutes = () => {
   ];
 
   return (
-    <div className="flex flex-col item center">
-      {FinanceRoutes.map((route) => (
+    <div className="flex flex-row item center">
+      {FinanceRoutes.map((route,index) => (
         <NavbarItems
           key={route.href}
           label={route.name}
           href={route.href}
           icon={route.icon}
+          isFirst={index === 0}
         />
       ))}
     </div>

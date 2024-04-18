@@ -27,40 +27,36 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { uploadSchema, uploadSchemaType } from "@/schema/validation";
 
-// function getImageData(event: React.ChangeEvent<HTMLInputElement>) {
-//   // FileList is immutable, so we need to create a new one
-//   const dataTransfer = new DataTransfer();
 
-//   // Add newly uploaded images
-//   Array.from(event.target.files!).forEach((image) =>
-//     dataTransfer.items.add(image)
-//   );
-
-//   const files = dataTransfer.files;
-//   const displayUrl = URL.createObjectURL(event.target.files![0]);
-
-//   return { files, displayUrl };
-// }
 
 const ImageUpload = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  // const [imgFile, setImgFile] = useState<string | File>("");
+  const [imgFile, setImgFile] = useState<string | File>("");
   const form = useForm<uploadSchemaType>({
     resolver: zodResolver(uploadSchema),
     defaultValues: {
       profile: "",
     },
   });
-  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files?.[0];
-  //   if (file) {
-  //     setSelectedImage(URL.createObjectURL(file));
-  //   }
-  // };
+ 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files![0];
+    console.log("checking",event);
+    if (file) {
+      const displayUrl = URL.createObjectURL(file);
+      setImgFile(file)
+      setSelectedImage(displayUrl);
+      form.setValue('profile', file); // Directly set the file in the form
+    }
+  };
+
   const imgSubmit = (values: uploadSchemaType) => {
-    const formValue = new FormData()
-    formValue.append("userImg",values.profile);
-    console.log("[image path]", formValue);
+    
+    // console.log(values.profile)
+    const formValues = new FormData()
+    formValues.append("profile", values.profile)
+    console.log(values.profile)
+
     toast.success("Image Uploaded  Successfully")
     form.reset();
     setSelectedImage(null)
@@ -104,15 +100,7 @@ const ImageUpload = () => {
                           id="img-upload"
                           className="hidden"
                           {...rest}
-                          onChange={(event) => {
-                            const file = event.target.files![0];
-                            if (file) {
-                              const displayUrl = URL.createObjectURL(file);
-                              setSelectedImage(displayUrl);
-                            
-                              onChange(file); // Pass the File object instead of FileList
-                            }
-                          }}
+                          onChange={handleFileChange}
                           // {...field}
                         />
                       </FormControl>

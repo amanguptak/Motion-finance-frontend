@@ -4,7 +4,14 @@ import "./globals.css";
 import { Toaster } from 'sonner';
 import Navbar from '@/components/Navbar';
 
-const inter = Inter({ subsets: ["latin"] });
+import { Ubuntu } from 'next/font/google';
+
+const ubuntu = Ubuntu({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-ubuntu',
+  weight: ['300', '400', '500', '700']
+});
 
 export const metadata: Metadata = {
   title: "Motion Finance App",
@@ -18,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={ubuntu.className}>
      <main>
     
       {children}
