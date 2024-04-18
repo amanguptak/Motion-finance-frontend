@@ -20,9 +20,7 @@ const NavbarItems = ({ label, icon: Icon, href, isFirst }: NavbarItemProps) => {
       <div
         className={cn(
           "py-3 my-3 rounded-md group",
-          isActive
-            ? "bg-slate-300 rounded-sm text-amber-400"
-            : "hover:text-white",
+          isActive ? "text-amber-400 " : "hover:text-white",
           !isFirst && "px-2"
         )}
       >
@@ -39,8 +37,11 @@ const NavbarItems = ({ label, icon: Icon, href, isFirst }: NavbarItemProps) => {
             <Icon className="mx-1" size={12} />
             <span className="hover:text-white">{label}</span>
           </div>
-
-          <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[2px] bg-white"></span>
+          {!isActive ? (
+            <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-[2px] bg-white"></span>
+          ) : (
+            <span className="block max-w-full transition-all duration-500 h-[2px] bg-white"></span>
+          )}
         </Link>
       </div>
     </>

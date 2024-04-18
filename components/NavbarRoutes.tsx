@@ -45,7 +45,7 @@ const NavbarRoutes = () => {
   ];
 
   return (
-    <div className="flex flex-row item center">
+    <div className="flex flex-row item center  ">
       {FinanceRoutes.map((route,index) => (
         <NavbarItems
           key={route.href}
