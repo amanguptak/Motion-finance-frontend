@@ -2,20 +2,21 @@
 import React from "react";
 import DataCard from "@/components/DataCard";
 import Nav from "./_components/Nav";
-import {HandCoins,TrendingUp,TrendingDown} from "lucide-react";
+import { HandCoins, TrendingUp, TrendingDown } from "lucide-react";
+import ChartData from "@/components/ChartData";
 const Home = () => {
   return (
     <div>
       <Nav />
-      <main className=" mt-[-8rem] ">
-        <div className="flex items-center justify-between  p-14  ">
+      <main className=" lg:mt-[-8rem] mt-[-4rem]">
+        <div className=" flex flex-col lg:flex-row items-center justify-between gap-4  lg:p-14  p-4 md:p-8 ">
           <DataCard
             label="Income"
             date="02/24"
             value="1000$"
             period="-43%from last period"
             icon={TrendingUp}
-            bgColor="green" 
+            bgColor="green"
           />
           <DataCard
             label="Expenses"
@@ -23,7 +24,7 @@ const Home = () => {
             value="1000$"
             period="-43%from last period"
             icon={TrendingDown}
-            bgColor="rose" 
+            bgColor="rose"
           />
 
           <DataCard
@@ -32,10 +33,15 @@ const Home = () => {
             value="1000$"
             period="-43%from last period"
             icon={HandCoins}
-            bgColor="amber" 
+            bgColor="amber"
           />
         </div>
+       
       </main>
+      <div className="p-14 pt-4"  >
+          <ChartData />
+        
+        </div>
     </div>
   );
 };

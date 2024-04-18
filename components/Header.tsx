@@ -1,12 +1,13 @@
 import React from 'react'
 import SearchBox from './Search'
+import Link from 'next/link'
 
 const Header = () => {
   return (
     <div className='flex items-center justify-between'>
-       <p className='font-bold text-lg'>
+       <Link href="/" className='font-bold text-lg cursor-pointer'>
         Motion-Finance
-        </p> 
+        </Link> 
 
         <SearchBox searchValue='Search anything...'/>
       
