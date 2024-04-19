@@ -24,7 +24,7 @@ const NavbarRoutes = () => {
       icon: LayoutDashboard,
     },
     {
-      href: "/tax-calculater",
+      href: "/user/tax-calculater",
       name: "Tax Calculation",
       icon: BadgeIndianRupee,
     },
