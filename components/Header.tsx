@@ -1,6 +1,7 @@
 import React from 'react'
 import SearchBox from './Search'
 import Link from 'next/link'
+import Profile from './Profile'
 
 const Header = () => {
   return (
@@ -9,7 +10,11 @@ const Header = () => {
         Motion-Finance
         </Link> 
 
-        <SearchBox searchValue='Search anything...'/>
+    <div className='flex items-center justify-between gap-4'>
+    <SearchBox searchValue='Search anything...'/>
+    <Profile/>
+    </div>
+       
       
     </div>
   )

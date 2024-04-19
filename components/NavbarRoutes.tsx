@@ -6,7 +6,9 @@ import {
   HandCoins,
   ReceiptText,
   CircleUserRound,
-  Hotel
+  Hotel,
+  Settings,
+  Bot
 } from "lucide-react";
 
 
@@ -40,7 +42,12 @@ const NavbarRoutes = () => {
     {
       href: "/settings",
       name: "Settings",
-      icon: HandCoins,
+      icon: Settings,
+    },
+    {
+      href: "/ai-docs",
+      name: "Ai-Pdf",
+      icon: Bot,
     },
   
   ];

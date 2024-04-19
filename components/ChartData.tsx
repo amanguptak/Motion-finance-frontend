@@ -1,14 +1,6 @@
 import React, { PureComponent } from "react";
 import {
-  BarChart,
-  Bar,
-  Rectangle,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from "recharts";
 
 const data = [
@@ -56,38 +48,41 @@ const data = [
   },
 ];
 
+const CustomBarShape = (props: any) => {
+  const { fill, x, y, width, height } = props;
+  const radius = 8;
+  return (
+    <path
+      d={`M${x},${y + radius}
+         a${radius},${radius} 0 0 1 ${radius},-${radius}
+         h${width - 2 * radius}
+         a${radius},${radius} 0 0 1 ${radius},${radius}
+         v${height - radius}
+         h${-width}
+         Z`}
+      fill={fill}
+    />
+  );
+};
+
 export default class ChartData extends PureComponent {
   render() {
     return (
-      <div className=" shadow-xl p-8 rounded-lg " style={{ width: "68.5%", height: "400px" }}>
-        <h2 className="font-bold text-slate-700 mb-3 ">Conversion History</h2>
+      <div className="shadow-xl p-8 rounded-lg cursor-pointer hover:shadow-rose-400 w-full md:w-3/4 lg:w-2/3 xl:w-2/3" 
+      style={{ height: '400px' }}>
+        <h2 className="font-bold text-slate-700 mb-3">Conversion History</h2>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            width={500}
-            height={500}
             data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
+            margin={{ top: 25, right: 30, left: 20, bottom: 20 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar
-              dataKey="pv"
-              fill="#fb7185"
-              activeBar={<Rectangle fill="#3a82f7" stroke="blue" />}
-            />
-            <Bar
-              dataKey="uv"
-              fill="#fda4af"
-              activeBar={<Rectangle fill="#93b4f9" stroke="blue" />}
-            />
+            <Bar dataKey="pv" fill="#fb7185" shape={CustomBarShape}/>
+            <Bar dataKey="uv" fill="#fda4af" shape={CustomBarShape} />
           </BarChart>
         </ResponsiveContainer>
       </div>
