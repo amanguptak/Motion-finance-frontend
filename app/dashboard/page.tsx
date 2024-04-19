@@ -7,9 +7,11 @@ import ChartData from "@/components/ChartData";
 import SpendingBreak from "@/components/SpendingBreak";
 
 const Home = () => {
-  return (
+  
+  
+return (
     <div>
-      <Nav />
+      {/* <Nav /> */}
       <main className="mt-[-4rem] md:mt-[-8rem] flex flex-col lg:flex-row items-center justify-between gap-4 p-4 md:p-8 lg:p-14">
         <DataCard
           label="Income"

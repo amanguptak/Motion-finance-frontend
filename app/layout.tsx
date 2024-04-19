@@ -5,6 +5,7 @@ import { Toaster } from 'sonner';
 import Navbar from '@/components/Navbar';
 
 import { Ubuntu } from 'next/font/google';
+import Header from "@/components/Header";
 
 const ubuntu = Ubuntu({
   subsets: ['latin'],
@@ -28,6 +29,8 @@ export default function RootLayout({
       <body className={ubuntu.className}>
      <main>
     
+    
+      <Header/>
       {children}
       
       </main>  

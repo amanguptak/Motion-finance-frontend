@@ -5,7 +5,7 @@ import Profile from './Profile'
 
 const Header = () => {
   return (
-    <div className='flex items-center justify-between'>
+    <div className='flex px-14 py-3 items-center justify-between text-white bg-gradient-to-r  from-[#fd4e59] to-rose-500'>
        <Link href="/" className='font-bold text-lg cursor-pointer'>
         Motion-Finance
         </Link> 
