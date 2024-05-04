@@ -5,7 +5,7 @@ import Link from "next/link";
 const Profile = () => {
   return (
     <div>
-      <Link href="/profile">
+      <Link href="/user">
       <Avatar>
         <AvatarImage src="https://github.com/shadcn.png" />
         <AvatarFallback>CN</AvatarFallback>

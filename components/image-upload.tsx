@@ -31,41 +31,42 @@ import { uploadSchema, uploadSchemaType } from "@/schema/validation";
 
 const ImageUpload = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [imgFile, setImgFile] = useState<string | File>("");
+  // const [imgFile, setImgFile] = useState<string | File>("");
   const form = useForm<uploadSchemaType>({
     resolver: zodResolver(uploadSchema),
-    defaultValues: {
-      profile: "",
-    },
+    defaultValues:{
+      profile:""
+    }
+   
   });
  
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files![0];
-    console.log("checking",event);
+    
     if (file) {
       const displayUrl = URL.createObjectURL(file);
-      setImgFile(file)
+      // setImgFile(file)
       setSelectedImage(displayUrl);
       form.setValue('profile', file); // Directly set the file in the form
     }
   };
 
   const imgSubmit = (values: uploadSchemaType) => {
-    
-    // console.log(values.profile)
+  
     const formValues = new FormData()
-    formValues.append("profile", values.profile)
-    console.log(values.profile)
-
+    formValues.append("profile", values?.profile)
+    const entries = Array.from(formValues.entries());
+    console.log("Checkform",entries);
     toast.success("Image Uploaded  Successfully")
     form.reset();
+  
     setSelectedImage(null)
   };
   return (
     <div>
       <Dialog>
         <>
-          <DialogTrigger className="text-center w-screen h-screen text-rose-500">
+          <DialogTrigger className="text-center  h-screen text-rose-500">
             Profile pic
           </DialogTrigger>
           <DialogContent>
@@ -99,6 +100,7 @@ const ImageUpload = () => {
                           type="file"
                           id="img-upload"
                           className="hidden"
+                          accept ="image/*"
                           {...rest}
                           onChange={handleFileChange}
                           // {...field}
