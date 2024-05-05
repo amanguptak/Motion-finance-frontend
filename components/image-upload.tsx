@@ -15,52 +15,60 @@ import { Label } from "@/components/ui/label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import girlImg from "@/public//images/upload.png";
+import axios from "axios";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { uploadSchema, uploadSchemaType } from "@/schema/validation";
 
-
-
 const ImageUpload = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  // const [imgFile, setImgFile] = useState<string | File>("");
+
   const form = useForm<uploadSchemaType>({
     resolver: zodResolver(uploadSchema),
-    defaultValues:{
-      profile:""
-    }
-   
+    defaultValues: {
+      profile: "",
+    },
   });
- 
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files![0];
-    
+
     if (file) {
       const displayUrl = URL.createObjectURL(file);
       // setImgFile(file)
       setSelectedImage(displayUrl);
-      form.setValue('profile', file); // Directly set the file in the form
+      form.setValue("profile", file); // Directly set the file in the form
     }
   };
 
-  const imgSubmit = (values: uploadSchemaType) => {
-  
-    const formValues = new FormData()
-    formValues.append("profile", values?.profile)
-    const entries = Array.from(formValues.entries());
-    console.log("Checkform",entries);
-    toast.success("Image Uploaded  Successfully")
-    form.reset();
-  
-    setSelectedImage(null)
+  const imgSubmit = async (values: uploadSchemaType) => {
+    try {
+      const formValues = new FormData();
+      formValues.append("profile", values?.profile);
+
+      const res = await axios.post("/api/user/upload-image", formValues, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      console.log(res);
+
+      const entries = Array.from(formValues.entries());
+      console.log("Checkform", entries);
+      toast.success("Image Uploaded  Successfully");
+      form.reset();
+
+      setSelectedImage(null);
+    } catch (err:any) {
+     
+      toast.error(err?.response.data?.message)
+    
+      console.log(err?.response.data?.message)
+      setSelectedImage(null);
+    }
   };
   return (
     <div>
@@ -100,7 +108,7 @@ const ImageUpload = () => {
                           type="file"
                           id="img-upload"
                           className="hidden"
-                          accept ="image/*"
+                          accept="image/*"
                           {...rest}
                           onChange={handleFileChange}
                           // {...field}
