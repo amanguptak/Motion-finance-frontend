@@ -74,8 +74,8 @@ const ImageUpload = () => {
     <div>
       <Dialog>
         <>
-          <DialogTrigger className="text-center  h-screen text-rose-500">
-            Profile pic
+          <DialogTrigger className="text-center text-rose-500">
+            Change Profile pic
           </DialogTrigger>
           <DialogContent>
             <Form {...form}>

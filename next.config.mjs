@@ -11,7 +11,9 @@ export default {
       // ... (Optional: Handle export paths if needed)
     },
     // ... (Other Next.js configuration options)
-  
+    images: {
+      domains: ['images.unsplash.com','motion-aman-bucket.s3.ap-south-1.amazonaws.com'],  // Add other domains as needed
+    },
     // Adding the proxy configuration
     async rewrites() {
       return [
