@@ -47,13 +47,13 @@ export function ProfileForm({profileDetails}:ProfileFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 my-1 shadow-md rounded-md p-5">
         <FormField
           control={form.control}
           name="firstName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>FirstName</FormLabel>
               <FormControl>
                 <Input placeholder={profileDetails?.firstName} {...field} />
               </FormControl>
@@ -70,7 +70,7 @@ export function ProfileForm({profileDetails}:ProfileFormProps) {
           name="lastName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>LastName</FormLabel>
               <FormControl>
                 <Input placeholder={profileDetails?.lastName} {...field} />
               </FormControl>
@@ -84,7 +84,7 @@ export function ProfileForm({profileDetails}:ProfileFormProps) {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input placeholder={profileDetails?.email} {...field} />
               </FormControl>
