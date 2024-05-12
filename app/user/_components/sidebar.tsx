@@ -44,7 +44,7 @@ const UserRoutes = [
 
 const SideBar = () => {
   return (
-    <div className="border-none m-4 shadow-xl rounded-lg py-3 px-2 bg-[#fe4f5a]">
+    <div className="border-none m-4  rounded-sm py-3 px-2 shadow-lg">
       {UserRoutes.map((route, index) => (
         <NavbarItems
           key={route.href}

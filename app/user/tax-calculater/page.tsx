@@ -49,7 +49,7 @@ const TaxCalculator = () => {
   return (
     <div className="flex items-center justify-center">
      
-      <div className="grid grid-cols-1   md:grid-cols-12 gap-x-2 p-5 m-5 min-h-screen lg:w-4/5">
+      <div className="grid grid-cols-1   md:grid-cols-12 gap-x-2">
       <div className="col-span-6 flex  items-center justify-center">
         <SideImg imageName={taximg} />
       </div>

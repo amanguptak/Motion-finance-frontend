@@ -46,8 +46,13 @@ export function ProfileForm({profileDetails}:ProfileFormProps) {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 my-1 shadow-md rounded-md p-5">
+    <>
+     <h3 className="font-semibold text-rose-500 text-2xl m-1 mb-4 mx-0">
+            Account Info
+          </h3>
+      <Form {...form}>
+        
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 my-1 ">
         <FormField
           control={form.control}
           name="firstName"
@@ -96,5 +101,7 @@ export function ProfileForm({profileDetails}:ProfileFormProps) {
         <Button type="submit">Update</Button>
       </form>
     </Form>
+    </>
+  
   );
 }
