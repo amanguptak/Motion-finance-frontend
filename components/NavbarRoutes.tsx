@@ -40,7 +40,7 @@ const NavbarRoutes = () => {
       icon: ReceiptText,
     },
     {
-      href: "/settings",
+      href: "/user/settings",
       name: "Settings",
       icon: Settings,
     },
