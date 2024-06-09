@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import SignUpImg from "@/public/images/signup.png";
+import {useMutation} from "@tanstack/react-query";
+import { registerType } from "@/schema/customTypte";
 import {
   Form,
   FormControl,
@@ -20,6 +22,8 @@ import Link from "next/link";
 import SideImg from "@/components/SideImg";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { registerUser } from "@/api/auth";
+import Spinner from "@/components/Spinner";
 const SignUp = () => {
   const router = useRouter();
   const form = useForm<SignUpSchemaType>({
@@ -32,19 +36,25 @@ const SignUp = () => {
       confirmPassword: "",
     },
   });
-  const onSubmit = async (values: SignUpSchemaType) => {
-    try {
-      const { confirmPassword, ...formData } = values;
-      const res = await axios.post("/api/auth/register", formData);
-      console.log(res.data);
-      form.reset();
-      toast.success("Registered Successfully");
 
-      router.push("/dashboard");
-    } catch (err: any) {
-      toast.error(err?.response?.data?.message);
-    }
-  };
+
+const mutation = useMutation<any, Error, registerType>({
+  mutationFn: registerUser,
+  onSuccess: (data) => {
+    toast.success("Registered Successfully");
+    form.reset();
+    router.push("/dashboard");
+  },
+  onError: (error: any) => {
+    toast.error(error?.response?.data?.message || "Registration failed");
+  },
+});
+
+const onSubmit = (values: SignUpSchemaType) => {
+  const { confirmPassword, ...formData } = values;
+  mutation.mutate(formData);
+};
+
   return (
     <div className="flex items-center flex-col lg:flex-row justify-center h-screen  overflow-hidden">
       <div className=" shadow-xl rounded-lg lg:w-[50%] cursor-pointer m-5 p-10 transform  hover:scale-105 transition-transform duration-300 ease-in-out">
@@ -131,7 +141,7 @@ const SignUp = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit">SignUP</Button>
+            <Button type="submit">{mutation.isPending ? <Spinner/> : "SignUP"} </Button>
           </form>
         </Form>
         <Link

@@ -58,29 +58,28 @@ export const uploadSchema = z.object({
         message: "Uploaded file must be an image", // Custom error message
       }
     )
-    .or(z.string().min(3,{message:"Please select an image to upload"})),
+    .or(z.string().min(3, { message: "Please select an image to upload" })),
+});
+
+export const ProfileSchema = z.object({
+  firstName: z
+    .string()
+    .min(1, { message: "firstName is required" })
+    .max(50, { message: "Name is too long" }),
+  lastName: z
+    .string()
+    .min(1, { message: "lastName is required" })
+    .max(50, { message: "Name is too long" }),
+  email: z
+    .string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Enter Valid Email" }),
+  imageUrl: z.string(),
+  imageName: z.string(),
 });
 
 
-export const ProfileSchema = z
-  .object({
-    firstName: z
-      .string()
-      .min(1, { message: "firstName is required" })
-      .max(50, { message: "Name is too long" }),
-    lastName: z
-      .string()
-      .min(1, { message: "lastName is required" })
-      .max(50, { message: "Name is too long" }),
-    email: z
-      .string()
-      .min(1, { message: "Email is required" })
-      .email({ message: "Enter Valid Email" }),
-    imageUrl: z.string(),
-    imageName: z.string()
-   
-  })
- 
+
 export type LoginSchemaType = z.infer<typeof loginSchema>;
 export type SignUpSchemaType = z.infer<typeof signUpSchema>;
 export type ForgetSchemaType = z.infer<typeof forgetSchema>;
